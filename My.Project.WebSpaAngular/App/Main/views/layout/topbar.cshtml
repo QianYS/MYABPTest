@@ -1,0 +1,138 @@
+﻿<!-- Search Bar -->
+@*<div class="search-bar" ng-controller="app.views.layout.topbar as vm">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input materialInput type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>*@
+<!-- #END# Search Bar -->
+@using Abp.Timing
+<header class="main-header">
+    <a href="#/" class="logo">
+        <span class="logo-mini"><b>Test</b></span>
+        <span class="logo-lg"><b>测试系统</b></span>
+    </a>
+    <nav class="navbar navbar-static-top" ng-controller="app.views.layout.topbar as vm">
+        <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">切换菜单栏</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown tasks-menu">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-users"></i>
+                        <span class="label label-warning">多账户</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">
+                            <a href="" ng-click="vm.manageLinkedAccounts()">
+                                管理多账户
+                            </a>
+                        </li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li ng-if="vm.isImpersonatedLogin">
+                                    <a href="" ng-click="vm.backToMyAccount()"><i class="icon-action-undo"></i> <strong>返回我的账号</strong></a>
+                                </li>
+                                <li ng-repeat="linkedUser in vm.recentlyUsedLinkedUsers">
+                                    <a href="" ng-click="vm.switchToUser(linkedUser)">
+                                        {{vm.getShownLinkedUserName(linkedUser)}}
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown notifications-menu">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning" ng-if="vm.unreadNotificationCount">{{vm.unreadNotificationCount}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header"><a href="" ng-click="vm.openNotificationSettingsModal()">消息订阅设置</a></li>
+                        <li><a href="" ng-click="vm.setAllNotificationsAsRead(); $event.preventDefault(); $event.stopPropagation();" ng-if="vm.unreadNotificationCount">全部已读</a></li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu" ng-repeat="notification in vm.notifications">
+                                <li>
+                                    <a href="{{notification.url}}" class="user-notification-item" ng-class="{'user-notification-item-unread': notification.state=='UNREAD', 'user-notification-item-clickable': notification.url}">
+                                        <i class="{{notification.icon}}"></i> 【{{notification.text}}】{{notification.data.properties.message}}
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="footer"><a ui-sref="notifications">查看全部消息</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown user user-menu">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <img id="HeaderProfilePicture" alt="头像" class="user-image" src="/images/user.png" />
+                        <span class="hidden-xs">{{vm.getShownUserName()}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="user-header">
+                            <img id="BigHeaderProfilePicture" src="/images/user.png" class="img-circle" alt="头像">
+                            <p>
+                                {{vm.getShownUserName()}}
+                                <small></small>
+                            </p>
+                        </li>
+                        <li class="user-body">
+                            <div class="row">
+                                <div class="col-xs-4 text-center">
+                                    <a href="" ng-click="vm.changePicture()">修改头像</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="" ng-click="vm.editMySettings()">我的信息</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="" ng-click="vm.showLoginAttempts()">登入记录</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="" ng-click="vm.openChangePasswordModal()" class="btn btn-default btn-flat"><i class="fa fa-lock"></i>修改密码</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="@Url.Action("Logout", "Account")" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i>退出系统</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        @*<div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index"><i class="fa fa-cubes"></i> Project</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                                <i class="{{vm.currentLanguage.icon}}" title="{{vm.currentLanguage.displayName}}"></i>
+                                {{vm.currentLanguage.displayName}}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="language in vm.languages">
+                                    <a ng-if="language.name != currentLanguage.name" href="#" ng-click="vm.changeLanguage(language.name)"><i class="{{language.icon}}"></i> {{language.displayName}}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                    </ul>
+                </div>
+            </div>*@
+    </nav>
+</header>

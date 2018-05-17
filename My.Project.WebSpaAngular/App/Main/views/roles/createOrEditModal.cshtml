@@ -1,0 +1,52 @@
+﻿<form id="frm_create_role" name="userCreateForm" novalidate class="form-horizontal form-validation">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+            <span>{{vm.title}}</span>
+        </h4>
+    </div>
+    <div uib-tabset class="modal-body nav-tabs-custom">
+        <uib-tab heading="基本信息">
+            <div class="form-group" ng-class="{'has-error':roleCreateForm.name.$invalid}">
+                <label class="col-sm-2 control-label" for="name">角色名</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="name" type="text"
+                           required
+                           maxlength="15"
+                           ng-model="vm.role.name">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':roleCreateForm.displayName.$invalid}">
+                <label class="col-sm-2 control-label" for="displayName">角色显示名</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="displayName" type="text"
+                           required
+                           ng-model="vm.role.displayName">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':roleCreateForm.description.$invalid}">
+                <label class="col-sm-2 control-label" for="description">描述</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="description" type="text"
+                           required
+                           ng-model="vm.role.description">
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab heading="权限">
+            <permission-tree edit-data="vm.permissionEditData"></permission-tree>
+            @*<js-tree tree-data="vm.permissionEditData"></js-tree>*@
+        </uib-tab>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+            <i class="fa fa-close"></i> @L("Cancel")
+        </button>
+        <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()" ng-disabled="roleCreateForm.$invalid" button-busy="vm.saving">
+            <i class="fa fa-save"></i> @L("Save")
+        </button>
+    </div>
+
+</form>

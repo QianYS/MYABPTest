@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "css/style.min.css",
+    "inputFiles": [
+      "css/style.css"
+    ]
+  },
+  {
+    "outputFileName": "css/ui/AdminLTE.min.css",
+    "inputFiles": [
+      "css/ui/AdminLTE.css"
+    ]
+  },
+  {
+    "outputFileName": "js/ui/app.min.js",
+    "inputFiles": [
+      "js/ui/app.js"
+    ]
+  }
+]

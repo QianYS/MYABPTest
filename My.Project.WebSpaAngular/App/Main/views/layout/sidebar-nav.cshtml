@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+<aside class="main-sidebar">
+    <section class="sidebar" role="navigation" ng-controller="app.views.layout.sidebarNav as vm">
+        <ul class="sidebar-menu">
+            <li class="header">主菜单</li>
+            <li ng-repeat="menuItem in vm.menu.items" ng-class="{active: menuItem.isActive,treeview:true}">
+                <a ng-if="!menuItem.items.length" ng-href="{{menuItem.url}}">
+                    <i class="{{menuItem.icon}}" ng-if="menuItem.icon"></i><span> {{menuItem.displayName}}</span>
+                </a>
+                <a ng-if="menuItem.items.length" href="" data-toggle="dropdown" ng-class="{active: menuItem.isActive,treeview:true}">
+                    <i class="{{menuItem.icon}}" ng-if="menuItem.icon"></i><span> {{menuItem.displayName}}</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul ng-if="menuItem.items.length" class="treeview-menu">
+                    <li ng-repeat="menuSubItem in menuItem.items" ng-class="{active: menuSubItem.isActive}">
+                        <a ng-href="{{menuSubItem.url}}">
+                            <i class="{{menuSubItem.icon}}" ng-if="menuSubItem.icon"></i> {{menuSubItem.displayName}}
+                            <span class="pull-right-container" ng-if="menuSubItem.items.length">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul ng-if="menuSubItem.items.length" class="treeview-menu">
+                            <li ng-repeat="menuSubItem2 in menuSubItem.items" ng-class="{active: menuSubItem2.isActive}">
+                                <a ng-href="{{menuSubItem2.url}}">
+                                    <i class="{{menuSubItem2.icon}}" ng-if="menuSubItem2.icon"></i> {{menuSubItem2.displayName}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>

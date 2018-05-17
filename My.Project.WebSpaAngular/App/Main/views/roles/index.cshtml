@@ -1,0 +1,135 @@
+﻿<div ng-controller="app.views.roles.index as vm">
+    <div ng-include="'/App/Main/views/layout/content-header.cshtml'"></div>
+    <div class="content">
+        <div class="box">
+            <div class="box-header with-border">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">角色列表</h3>
+                <div class="pull-right box-tools">
+
+                </div>
+            </div>
+            <div class="box-body" busy-if="vm.loading||vm.initializing">
+                <div class="margin-5 row">
+                    <div class="col-sm-12">
+                        <form class="form-inline pull-left" role="form" ng-submit="vm.getGridData()">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" placeholder="@L("RoleName")"
+                                       ng-model="vm.requestParams.filter"
+                                       ng-show="!vm.advancedSearch">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-warning" uib-tooltip="搜索"
+                                            ng-show="!vm.advancedSearch">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end 简单搜索-->
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="margin-5 row">
+                    <div class="col-sm-12">
+                        <!--按钮-->
+                        <button ng-click="vm.createOrEditModal(null)" class="btn btn-sm" uib-tooltip="新增角色">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button ng-click="vm.refresh()" class="btn btn-sm btn-default" uib-tooltip="刷新数据">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <!--end 按钮-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" ui-i18n="zh-cn">
+                        <div class="body table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>@L("RoleName")</th>
+                                        <th>@L("RoleDisplayName")</th>
+                                        <th>@L("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="role in vm.roles">
+                                        <td>{{role.name}}</td>
+                                        <td>{{role.displayName}}</td>
+                                        <td style="vertical-align:middle">
+                                            <div class="ui-grid-cell-contents">
+                                                <div class="btn-group">
+                                                    <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>
+                                                        <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle="">
+                                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                                        </a>
+                                                        <ul uib-dropdown-menu class="dropdown-menu-left">
+                                                            @*<li><a ng-click="vm.createOrEditModal(role)" href=""><i class="fa fa-edit"></i>修改</a></li>*@
+                                                            <li><a ng-click="vm.openRoleEditModal(role)" href=""><i class="fa fa-edit"></i>修改</a></li>
+                                                            <li><a ng-click="vm.delete(role)" href=""><i class="fa fa-trash-o"></i>删除</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <my-pagination page-option="vm.requestParams" class="pull-right"></my-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="header">
+                <h2>
+                    @L("Roles")
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <i class="fa fa-spin fa-spinner" ng-if="isTableLoading"></i>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);" class="waves-effect <waves-block></waves-block>" ng-click="vm.refresh();"><i class="material-icons">refresh</i> Refresh</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>@L("RoleName")</th>
+                            <th>@L("DisplayName")</th>
+                            <th>@L("Actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="role in vm.roles">
+                            <td>{{role.name}}</td>
+                            <td>{{role.displayName}}</td>
+                            <td class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">menu</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" ng-click="vm.openRoleEditModal(role)"><i class="material-icons">create</i>Edit</a></li>
+                                    <li><a href="javascript:void(0);" class="waves-effect waves-block" ng-click="vm.delete(role)"><i class="material-icons">delete_sweep</i>Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" ng-click="vm.openRoleCreationModal()">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+        </div>
+    </div>*@
+</div>

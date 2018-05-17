@@ -1,0 +1,15 @@
+﻿@{
+    Layout = null;
+}
+<div class="content-header" ng-controller="app.views.layout.contentHeader as vm">
+    <h1>
+        {{vm.currentMenuText}}
+        <small></small>
+    </h1>
+    <ol class="breadcrumb" >
+        <li><a href="#/"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li ng-repeat="item in vm.breadcrumbList" ng-class="{active:item.name==vm.currentMenuName}">
+            <a ng-href="{{item.url}}">{{item.displayName}}</a>
+        </li>
+    </ol>
+</div>
