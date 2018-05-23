@@ -50,6 +50,7 @@
                                     <tr>
                                         <th>@L("RoleName")</th>
                                         <th>@L("RoleDisplayName")</th>
+                                        <th>@L("Description")</th>
                                         <th>@L("Actions")</th>
                                     </tr>
                                 </thead>
@@ -57,6 +58,7 @@
                                     <tr ng-repeat="role in vm.roles">
                                         <td>{{role.name}}</td>
                                         <td>{{role.displayName}}</td>
+                                        <td>{{role.description}}</td>
                                         <td style="vertical-align:middle">
                                             <div class="ui-grid-cell-contents">
                                                 <div class="btn-group">

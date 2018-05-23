@@ -25,14 +25,22 @@
                 vm.saving = true;
                 if(Entity.Id==null||Entity.Id=="")
                 {
-
-                }else
-                {
-                    roleService.createOrUpdateRole({
+                    roleService.create({
                         role: vm.role,
                         grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
                     }).then(function () {
-                        abp.notify.info(app.localize('SavedSuccessfully'));
+                        abp.notify.success('SavedSuccessfully');
+                        $uibModalInstance.close();
+                    }).finally(function () {
+                        vm.saving = false;
+                    });
+                }else
+                {
+                    roleService.update({
+                        role: vm.role,
+                        grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
+                    }).then(function () {
+                        abp.notify.success('SavedSuccessfully');
                         $uibModalInstance.close();
                     }).finally(function () {
                         vm.saving = false;

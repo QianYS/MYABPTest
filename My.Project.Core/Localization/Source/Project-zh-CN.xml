@@ -31,6 +31,7 @@
     
     <text name="RoleName" value="角色名" />
     <text name="RoleDisplayName" value="角色显示名" />
+    <text name="Description" value="描述" />
 
     <text name="Tenants" value="租户" />
     <text name="SavedSuccessfully" value="保存成功" />

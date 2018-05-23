@@ -27,6 +27,11 @@ namespace My.Project.Roles.Dto
         public string DisplayName { get; set; }
 
         /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// 是否静态
         /// </summary>
         public bool IsStatic { get; set; }

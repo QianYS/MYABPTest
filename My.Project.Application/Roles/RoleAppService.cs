@@ -106,7 +106,7 @@ namespace My.Project.Roles
 
             var role = await _roleManager.GetRoleByIdAsync(input.Role.Id.Value);
 
-            ObjectMapper.Map(input, role);
+            ObjectMapper.Map(input.Role, role);
 
             CheckErrors(await _roleManager.UpdateAsync(role));
 

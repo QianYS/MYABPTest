@@ -20,6 +20,24 @@ namespace My.Project.Roles
         /// <returns></returns>
         Task<GetRoleForEditOutput> GetRoleForEdit(NullableIdDto input);
 
+        /// <summary>
+        /// 获取权限
+        /// </summary>
+        /// <returns></returns>
         Task<ListResultDto<PermissionDto>> GetAllPermissions();
+
+        /// <summary>
+        /// 新增角色
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<RoleDto> Create(CreateOrUpdateRoleInput input);
+
+        /// <summary>
+        /// 更新角色
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<RoleDto> Update(CreateOrUpdateRoleInput input);
     }
 }
