@@ -23,15 +23,22 @@
             
             vm.save = function () {
                 vm.saving = true;
-                roleService.createOrUpdateRole({
-                    role: vm.role,
-                    grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
-                }).then(function () {
-                    abp.notify.info(app.localize('SavedSuccessfully'));
-                    $uibModalInstance.close();
-                }).finally(function () {
-                    vm.saving = false;
-                });
+                if(Entity.Id==null||Entity.Id=="")
+                {
+
+                }else
+                {
+                    roleService.createOrUpdateRole({
+                        role: vm.role,
+                        grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
+                    }).then(function () {
+                        abp.notify.info(app.localize('SavedSuccessfully'));
+                        $uibModalInstance.close();
+                    }).finally(function () {
+                        vm.saving = false;
+                    });
+                }
+                
             };
 
             vm.cancel = function () {

@@ -82,17 +82,17 @@ namespace My.Project.Roles
                 );
         }
 
-        public override async Task<RoleDto> Create(CreateRoleDto input)
+        public async Task<RoleDto> Create(CreateOrUpdateRoleInput input)
         {
             CheckCreatePermission();
 
-            var role = ObjectMapper.Map<Role>(input);
+            var role = ObjectMapper.Map<Role>(input.Role);
 
             CheckErrors(await _roleManager.CreateAsync(role));
 
             var grantedPermissions = PermissionManager
                 .GetAllPermissions()
-                .Where(p => input.Permissions.Contains(p.Name))
+                .Where(p => input.GrantedPermissionNames.Contains(p.Name))
                 .ToList();
 
             await _roleManager.SetGrantedPermissionsAsync(role, grantedPermissions);
@@ -100,11 +100,11 @@ namespace My.Project.Roles
             return MapToEntityDto(role);
         }
 
-        public override async Task<RoleDto> Update(RoleDto input)
+        public async Task<RoleDto> Update(CreateOrUpdateRoleInput input)
         {
             CheckUpdatePermission();
 
-            var role = await _roleManager.GetRoleByIdAsync(input.Id);
+            var role = await _roleManager.GetRoleByIdAsync(input.Role.Id.Value);
 
             ObjectMapper.Map(input, role);
 
@@ -112,7 +112,7 @@ namespace My.Project.Roles
 
             var grantedPermissions = PermissionManager
                 .GetAllPermissions()
-                .Where(p => input.Permissions.Contains(p.Name))
+                .Where(p => input.GrantedPermissionNames.Contains(p.Name))
                 .ToList();
 
             await _roleManager.SetGrantedPermissionsAsync(role, grantedPermissions);

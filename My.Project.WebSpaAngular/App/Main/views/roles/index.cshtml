@@ -33,7 +33,7 @@
                 <div class="margin-5 row">
                     <div class="col-sm-12">
                         <!--按钮-->
-                        <button ng-click="vm.createOrEditModal(null)" class="btn btn-sm" uib-tooltip="新增角色">
+                        <button ng-click="vm.openRoleEditModal(null)" class="btn btn-sm" uib-tooltip="新增角色">
                             <i class="fa fa-plus"></i>
                         </button>
                         <button ng-click="vm.refresh()" class="btn btn-sm btn-default" uib-tooltip="刷新数据">
@@ -65,7 +65,6 @@
                                                             <i class="glyphicon glyphicon-align-justify"></i>
                                                         </a>
                                                         <ul uib-dropdown-menu class="dropdown-menu-left">
-                                                            @*<li><a ng-click="vm.createOrEditModal(role)" href=""><i class="fa fa-edit"></i>修改</a></li>*@
                                                             <li><a ng-click="vm.openRoleEditModal(role)" href=""><i class="fa fa-edit"></i>修改</a></li>
                                                             <li><a ng-click="vm.delete(role)" href=""><i class="fa fa-trash-o"></i>删除</a></li>
                                                         </ul>
