@@ -8,7 +8,7 @@ using My.Project.WebMpa.Models.Roles;
 
 namespace My.Project.WebMpa.Controllers
 {
-    [AbpMvcAuthorize(PermissionNames.Pages_Roles)]
+    [AbpMvcAuthorize(PermissionNames.Pages_Sys_Roles)]
     public class RolesController : ProjectControllerBase
     {
         private readonly IRoleAppService _roleAppService;

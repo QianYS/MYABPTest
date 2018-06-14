@@ -20,28 +20,28 @@
             $locationProvider.hashPrefix('');
             $urlRouterProvider.otherwise('/');
             $qProvider.errorOnUnhandledRejections(false);
-
-            if (abp.auth.hasPermission('Pages.Users')) {
+            //用户管理
+            if (abp.auth.hasPermission('Pages.Sys.Users')) {
                 $stateProvider
                     .state('users', {
                         url: '/users',
-                        templateUrl: '/App/Main/views/users/index.cshtml',
+                        templateUrl: '/App/Main/views/sys/users/index.cshtml',
                         menu: 'Users' //Matches to name of 'Users' menu in ProjectNavigationProvider
                     });
                 //$urlRouterProvider.otherwise('/users');
             }
-
-            if (abp.auth.hasPermission('Pages.Roles')) {
+            //角色管理
+            if (abp.auth.hasPermission('Pages.Sys.Roles')) {
                 $stateProvider
                     .state('roles', {
                         url: '/roles',
-                        templateUrl: '/App/Main/views/roles/index.cshtml',
+                        templateUrl: '/App/Main/views/sys/roles/index.cshtml',
                         menu: 'Roles' //Matches to name of 'Tenants' menu in ProjectNavigationProvider
                     });
                 //$urlRouterProvider.otherwise('/roles');
             }
-
-            if (abp.auth.hasPermission('Pages.Tenants')) {
+            //租户管理
+            if (abp.auth.hasPermission('Pages.Sys.Tenants')) {
                 $stateProvider
                     .state('tenants', {
                         url: '/tenants',
@@ -50,6 +50,22 @@
                     });
                 //$urlRouterProvider.otherwise('/tenants');
             }
+
+            //地区管理
+            if (abp.auth.hasPermission('Pages.Sys.Places')) {
+                $stateProvider
+                    .state('places', {
+                        url: '/places',
+                        templateUrl: '/App/Main/views/sys/places/index.cshtml',
+                        menu: 'Places' //Matches to name of 'Tenants' menu in ProjectNavigationProvider
+                    });
+                //$urlRouterProvider.otherwise('/tenants');
+            }
+
+
+
+
+
 
             $stateProvider
                 .state('home', {

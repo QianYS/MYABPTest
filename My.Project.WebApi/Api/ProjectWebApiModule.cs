@@ -24,6 +24,9 @@ namespace My.Project.Api
 
             Configuration.Modules.AbpWebApi().HttpConfiguration.Filters.Add(new HostAuthenticationFilter("Bearer"));
 
+            //发送错误数据到前台
+            Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
+
             ConfigureSwaggerUi();
         }
 

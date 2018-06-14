@@ -16,5 +16,17 @@
     "inputFiles": [
       "js/ui/app.js"
     ]
+  },
+  {
+    "outputFileName": "Content/bootstrap.min.css",
+    "inputFiles": [
+      "Content/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "lib/bootstrap/dist/css/bootstrap.min.css",
+    "inputFiles": [
+      "lib/bootstrap/dist/css/bootstrap.css"
+    ]
   }
 ]

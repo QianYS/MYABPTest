@@ -237,6 +237,14 @@
     <Compile Include="Migrations\201804240906200_4-24-17-04.Designer.cs">
       <DependentUpon>201804240906200_4-24-17-04.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805250206419_5-25-10-06.cs" />
+    <Compile Include="Migrations\201805250206419_5-25-10-06.Designer.cs">
+      <DependentUpon>201805250206419_5-25-10-06.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805280152325_5-28-9-52.cs" />
+    <Compile Include="Migrations\201805280152325_5-28-9-52.Designer.cs">
+      <DependentUpon>201805280152325_5-28-9-52.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbpZeroDbMigrator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectDataModule.cs" />
@@ -286,6 +294,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804240906200_4-24-17-04.resx">
       <DependentUpon>201804240906200_4-24-17-04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250206419_5-25-10-06.resx">
+      <DependentUpon>201805250206419_5-25-10-06.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805280152325_5-28-9-52.resx">
+      <DependentUpon>201805280152325_5-28-9-52.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

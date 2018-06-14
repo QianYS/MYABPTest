@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module('app').controller('app.views.roles.createOrEditModal', [
+    angular.module('app').controller('app.views.sys.roles.createOrEditModal', [
         '$scope', '$uibModalInstance', 'abp.services.app.role', 'Entity',
         function ($scope, $uibModalInstance, roleService, Entity) { 
             var vm = this;

@@ -22,7 +22,7 @@ using Abp.AutoMapper;
 
 namespace My.Project.Roles
 {
-    [AbpAuthorize(PermissionNames.Pages_Roles)]
+    [AbpAuthorize(PermissionNames.Pages_Sys_Roles)]
     public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
     {
         private readonly RoleManager _roleManager;

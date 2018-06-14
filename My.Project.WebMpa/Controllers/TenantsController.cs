@@ -7,7 +7,7 @@ using My.Project.MultiTenancy;
 
 namespace My.Project.WebMpa.Controllers
 {
-    [AbpMvcAuthorize(PermissionNames.Pages_Tenants)]
+    [AbpMvcAuthorize(PermissionNames.Pages_Sys_Tenants)]
     public class TenantsController : ProjectControllerBase
     {
         private readonly ITenantAppService _tenantAppService;

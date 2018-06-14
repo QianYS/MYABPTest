@@ -17,7 +17,7 @@ using Microsoft.AspNet.Identity;
 
 namespace My.Project.Users
 {
-    [AbpAuthorize(PermissionNames.Pages_Users)]
+    [AbpAuthorize(PermissionNames.Pages_Sys_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedResultRequestDto, CreateUserDto, UpdateUserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
@@ -44,6 +44,11 @@ namespace My.Project.Users
             return user;
         }
 
+        /// <summary>
+        /// 新增用户信息
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public override async Task<UserDto> Create(CreateUserDto input)
         {
             CheckCreatePermission();
@@ -67,6 +72,11 @@ namespace My.Project.Users
             return MapToEntityDto(user);
         }
 
+        /// <summary>
+        /// 更新用户信息
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public override async Task<UserDto> Update(UpdateUserDto input)
         {
             CheckUpdatePermission();
@@ -85,12 +95,17 @@ namespace My.Project.Users
             return await Get(input);
         }
 
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public override async Task Delete(EntityDto<long> input)
         {
             var user = await _userManager.GetUserByIdAsync(input.Id);
             await _userManager.DeleteAsync(user);
         }
-
+        
         public async Task<ListResultDto<RoleDto>> GetRoles()
         {
             var roles = await _roleRepository.GetAllListAsync();

@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module('app').controller('app.views.users.createOrEditModal', [
+    angular.module('app').controller('app.views.sys.users.createOrEditModal', [
         '$scope', '$uibModalInstance', 'abp.services.app.user', 'Entity',
         function ($scope, $uibModalInstance, userService, Entity) {            
             var vm = this;

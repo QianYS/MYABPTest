@@ -1,0 +1,69 @@
+﻿<form id="frm_create_place" name="placeCreateOrEditForm" novalidate class="form-horizontal form-validation">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+            <span>{{vm.title}}</span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group form-inline" ng-class="{'has-error':placeCreateOrEditForm.parentName.$invalid}">
+                    <label class="col-sm-4 control-label" for="parentName">父级城市</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="parentName" type="text"
+                               ng-disabled="true"
+                               required
+                               ng-model="vm.place.parentName">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-inline" ng-class="{'has-error':placeCreateOrEditForm.parentCode.$invalid}">
+                    <label class="col-sm-4 control-label" for="parentCode">父城市编码</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="parentCode" type="text"
+                               ng-disabled="true"
+                               required
+                               maxlength="10"
+                               ng-model="vm.place.parentCode">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group form-inline" ng-class="{'has-error':placeCreateOrEditForm.name.$invalid}">
+                    <label class="col-sm-4 control-label" for="name">城市名</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="name" type="text"
+                               required
+                               ng-model="vm.place.name">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-inline" ng-class="{'has-error':placeCreateOrEditForm.code.$invalid}">
+                    <label class="col-sm-4 control-label" for="code">城市编码</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="code" type="text"
+                               required
+                               maxlength="10"
+                               ng-model="vm.place.code">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+            <i class="fa fa-close"></i> @L("Cancel")
+        </button>
+        <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()" ng-disabled="placeCreateOrEditForm.$invalid" button-busy="vm.saving">
+            <i class="fa fa-save"></i> @L("Save")
+        </button>
+    </div>
+
+</form>

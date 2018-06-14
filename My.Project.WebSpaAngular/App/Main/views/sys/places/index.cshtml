@@ -1,18 +1,17 @@
-﻿<div ng-controller="app.views.users.index as vm">
+﻿<div ng-controller="app.views.sys.places.index as vm">
     <div ng-include="'/App/Main/views/layout/content-header.cshtml'"></div>
-    <div class="content">
+    <div class="content" busy-if="vm.loading||vm.initializing">
         <div class="box">
             <div class="box-header with-border">
                 <i class="fa fa-list"></i>
-                <h3 class="box-title">用户列表</h3>
+                <h3 class="box-title">地区管理</h3>
                 <div class="pull-right box-tools">
-
                 </div>
             </div>
-            <div class="box-body" busy-if="vm.loading||vm.initializing">
+            <div class="box-body">
                 <div class="margin-5 row">
                     <div class="col-sm-12">
-                        <form class="form-inline pull-left" role="form" ng-submit="vm.getGridData()">
+                        <form class="form-inline pull-left" role="form" ng-submit="vm.getSearch()">
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="text" placeholder="用户名，姓名或邮箱"
                                        ng-model="vm.requestParams.filter"
@@ -33,7 +32,7 @@
                 <div class="margin-5 row">
                     <div class="col-sm-12">
                         <!--按钮-->
-                        <button ng-click="vm.createOrEditModal(null)" class="btn btn-sm" uib-tooltip="新增用户">
+                        <button ng-click="vm.createOrEditModal(null,true)" class="btn btn-sm" uib-tooltip="新增地区">
                             <i class="fa fa-plus"></i>
                         </button>
                         <button ng-click="vm.refresh()" class="btn btn-sm btn-default" uib-tooltip="刷新数据">
@@ -45,27 +44,24 @@
                 <div class="row">
                     <div class="col-md-12" ui-i18n="zh-cn">
                         <div class="body table-responsive">
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped" style="max-width:1500px;">
                                 <thead>
                                     <tr>
-                                        <th>@L("UserName")</th>
-                                        <th>@L("FullName")</th>
-                                        <th>@L("EmailAddress")</th>
-                                        <th>
-                                            <div style="text-align:center">@L("IsActive")</div>
-                                        </th>
-                                        <th>@L("Actions")</th>
+                                        <th width="300">@L("PlaceCode")</th>
+                                        <th width="300">@L("PlaceName")</th>
+                                        <th width="300">@L("Affiliation")</th>
+                                        <th width="200">@L("PlaceDeep")</th>
+                                        <th width="200">@L("PlaceAdminister")</th>
+                                        <th width="200">@L("Actions")</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="user in vm.users">
-                                        <td>{{user.userName}}</td>
-                                        <td>{{user.fullName}}</td>
-                                        <td>{{user.emailAddress}}</td>
-                                        <td align="center">
-                                            <i ng-if="user.isActive" class="text-success glyphicon glyphicon-ok"></i>
-                                            <i ng-if="!user.isActive"  class="text-danger glyphicon glyphicon-remove"></i>
-                                        </td>
+                                    <tr ng-repeat="place in vm.places">
+                                        <td>{{place.code}}</td>
+                                        <td>{{place.name}}</td>
+                                        <td>{{place.parentName}}</td>
+                                        <td>{{place.deep}}</td>
+                                        <td>{{place.administerCount}}</td>
                                         <td style="vertical-align:middle">
                                             <div class="ui-grid-cell-contents">
                                                 <div class="btn-group">
@@ -74,8 +70,12 @@
                                                             <i class="glyphicon glyphicon-align-justify"></i>
                                                         </a>
                                                         <ul uib-dropdown-menu class="dropdown-menu-left">
-                                                            <li><a ng-click="vm.createOrEditModal(user)" href=""><i class="fa fa-edit"></i>修改</a></li>
-                                                            <li><a ng-click="vm.delete(user)" href=""><i class="fa fa-trash-o"></i>删除</a></li>
+                                                            <li><a ng-click="vm.createOrEditModal(place,true)" href=""><i class="fa fa-edit"></i>修改</a></li>
+                                                            <li><a ng-click="vm.delete(place)" href=""><i class="fa fa-trash-o"></i>删除</a></li>
+                                                            <li class="divider"></li>
+                                                            <li ng-if="place.deep!=1"><a ng-click="vm.getParentList(place)" href=""><i class="fa fa-angle-up"></i>上级城市</a></li>
+                                                            <li><a ng-click="vm.getChildList(place)" href=""><i class="fa fa-angle-down"></i>下辖市区</a></li>
+                                                            <li><a ng-click="vm.createOrEditModal(place,false)" href=""><i class="fa fa-plus"></i>新增下辖市区</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -84,8 +84,8 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <my-pagination page-option="vm.requestParams" class="pull-right"></my-pagination>
                         </div>
+                        <my-pagination page-option="vm.requestParams" class="pull-right"></my-pagination>
                     </div>
                 </div>
             </div>

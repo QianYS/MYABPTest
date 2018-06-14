@@ -220,7 +220,17 @@
     <Compile Include="Roles\Dto\RoleEditDto.cs" />
     <Compile Include="Roles\Dto\RoleListDto.cs" />
     <Compile Include="Roles\IRoleAppService.cs" />
+    <Compile Include="Sys\Places\Dto\CreateOrUpdateInput.cs" />
+    <Compile Include="Sys\Places\Dto\GetChildListInput.cs" />
+    <Compile Include="Sys\Places\Dto\GetIndexListInput.cs" />
+    <Compile Include="Sys\Places\Dto\GetPlacesForEditInput.cs" />
+    <Compile Include="Sys\Places\Dto\CreateChildOrEditOutput.cs" />
+    <Compile Include="Sys\Places\Dto\PlaceDto.cs" />
+    <Compile Include="Sys\Places\Dto\PlaceIndexOutput.cs" />
+    <Compile Include="Sys\Places\IPlaceAppService.cs" />
+    <Compile Include="Sys\Places\PlaceAppService.cs" />
     <Compile Include="Users\Dto\CreateUserDto.cs" />
+    <Compile Include="Users\Dto\GetRoleForEditOutput.cs" />
     <Compile Include="Users\Dto\UpdateUserDto.cs" />
     <Compile Include="Users\Dto\UserDto.cs" />
     <Compile Include="Users\IUserAppService.cs" />
@@ -242,6 +252,7 @@
       <Name>My.Project.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

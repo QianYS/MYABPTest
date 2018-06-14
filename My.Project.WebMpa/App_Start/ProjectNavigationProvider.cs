@@ -29,7 +29,7 @@ namespace My.Project.WebMpa
                         L("Tenants"),
                         url: "Tenants",
                         icon: "business",
-                        requiredPermissionName: PermissionNames.Pages_Tenants
+                        requiredPermissionName: PermissionNames.Pages_Sys_Tenants
                     )
                 ).AddItem(
                     new MenuItemDefinition(
@@ -37,7 +37,7 @@ namespace My.Project.WebMpa
                         L("Users"),
                         url: "Users",
                         icon: "people",
-                        requiredPermissionName: PermissionNames.Pages_Users
+                        requiredPermissionName: PermissionNames.Pages_Sys_Users
                     )
                 ).AddItem(
                     new MenuItemDefinition(
@@ -45,7 +45,7 @@ namespace My.Project.WebMpa
                         L("Roles"),
                         url: "Roles",
                         icon: "local_offer",
-                        requiredPermissionName: PermissionNames.Pages_Roles
+                        requiredPermissionName: PermissionNames.Pages_Sys_Roles
                     )
                 )
                 .AddItem(

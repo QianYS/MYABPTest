@@ -1,10 +1,11 @@
 ﻿(function () {
-    angular.module('app').controller('app.views.users.index', [
-        '$scope', '$timeout', '$uibModal', 'abp.services.app.user',
-        function ($scope, $timeout, $uibModal, userService) {
+    angular.module('app').controller('app.views.sys.places.index', [
+        '$scope', '$timeout', '$uibModal', 'abp.services.app.place',
+        function ($scope, $timeout, $uibModal, placeService) {
+            console.log($uibModal);
             var vm = this;
             vm.loading = true;
-            vm.users = [];
+            vm.places = [];
             //页面数据显示条数
             var defaultPageSize = 20;
             //查询参数 & 分页组件参数
@@ -13,42 +14,60 @@
                 skipCount: 0,
                 maxResultCount: defaultPageSize,
                 sorting: null,
+                deep: 1,
+                isParentOrSon: true,
                 //页码点击跳转
                 click: function (page) {
                     vm.requestParams.skipCount = (page - 1) * defaultPageSize;
                     vm.getGridData()
                 }
             };
+
+            vm.getParentList = function (entity) {
+                vm.requestParams.filter =" ";
+                vm.requestParams.code = entity.parentCode;
+                vm.requestParams.deep = entity.deep - 1;
+                vm.requestParams.isParentOrSon = false;
+                vm.getGridData();
+            }
+
+            vm.getChildList = function(entity){
+                vm.requestParams.filter =" ";
+                vm.requestParams.code = entity.code;
+                vm.requestParams.deep = entity.deep + 1;
+                vm.requestParams.isParentOrSon = true;
+                vm.getGridData();
+            }
             
             vm.getGridData = function () {
                 vm.loading = true;
-                var s = userService.getAll(vm.requestParams).then(function (result) {
+                var s = placeService.getIndexList(vm.requestParams).then(function (result) {
                     vm.requestParams.totalCount = result.data.totalCount
-                    vm.users = result.data.items;
+                    vm.places = result.data.items;
                 }).finally(function () {
                     vm.loading = false;
                 });
             };
             
-            //打开编辑窗口
-            vm.createOrEditModal = function (entity) {
+            //打开编辑窗口 新增或修改
+            vm.createOrEditModal = function (place,isChangedOrCreate) {
                 var modalInstance = $uibModal.open({
-                    templateUrl: '~/App/Main/views/users/createOrEditModal.cshtml',
-                    controller: 'app.views.users.createOrEditModal as vm',
+                    templateUrl: '~/App/Main/views/sys/places/createOrEditModal.cshtml',
+                    controller: 'app.views.sys.places.createOrEditModal as vm',
                     backdrop: 'static',
                     resolve: {
                         Entity: {
-                            Id: entity == null ? null : entity.id
+                            Code: place == null ? null : place.code,
+                            IsChangedOrCreate: isChangedOrCreate
                         },
                     }
                 });
                 modalInstance.result.then(function (result) {
                     vm.getGridData();
                 }, function () {
-                    // 处理dismiss，必须保留这个function
                 });
             }
-
+            
             //删除
             vm.delete = function (user) {
                 abp.message.confirm(
@@ -63,10 +82,20 @@
                         }
                     });
             }
+
             //刷新
             vm.refresh = function () {
+                vm.requestParams.code = "";
+                vm.requestParams.deep = 1;
+                vm.requestParams.isParentOrSon = true;
                 vm.getGridData();
             };
+
+            vm.getSearch = function () {
+                vm.requestParams.code = "";
+                vm.requestParams.deep = null;
+                vm.getGridData();
+            }
 
             vm.getGridData();
 

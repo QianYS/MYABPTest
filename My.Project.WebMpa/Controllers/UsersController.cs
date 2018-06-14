@@ -18,7 +18,7 @@ using My.Project.WebMpa.Models.Users;
 
 namespace My.Project.WebMpa.Controllers
 {
-    [AbpMvcAuthorize(PermissionNames.Pages_Users)]
+    [AbpMvcAuthorize(PermissionNames.Pages_Sys_Users)]
     public class UsersController : ProjectControllerBase
     {
         private readonly IUserAppService _userAppService;

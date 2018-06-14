@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module('app').controller('app.views.roles.index', [
+    angular.module('app').controller('app.views.sys.roles.index', [
         '$scope', '$uibModal', 'abp.services.app.role',
         function ($scope, $uibModal, roleService) {
             var vm = this;
@@ -29,26 +29,10 @@
                 });
             };
 
-            vm.openRoleCreationModal = function () {
+            vm.createOrEditModal = function (role) {
                 var modalInstance = $uibModal.open({
-                    templateUrl: '/App/Main/views/roles/createModal.cshtml',
-                    controller: 'app.views.roles.createModal as vm',
-                    backdrop: 'static'
-                });
-
-                modalInstance.rendered.then(function () {
-                    $.AdminBSB.input.activate();
-                });
-
-                modalInstance.result.then(function () {
-                    vm.getGridData();
-                });
-            };
-
-            vm.openRoleEditModal = function (role) {
-                var modalInstance = $uibModal.open({
-                    templateUrl: '~/App/Main/views/roles/createOrEditModal.cshtml',
-                    controller: 'app.views.roles.createOrEditModal as vm',
+                    templateUrl: '~/App/Main/views/sys/roles/createOrEditModal.cshtml',
+                    controller: 'app.views.sys.roles.createOrEditModal as vm',
                     backdrop: 'static',
                     resolve: {
                         Entity: {

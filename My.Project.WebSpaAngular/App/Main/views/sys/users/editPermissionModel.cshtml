@@ -1,0 +1,22 @@
+﻿<form id="frm_create_role" name="userCreateForm" novalidate class="form-horizontal form-validation">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+            <span>{{vm.title}}</span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <permission-tree edit-data="vm.permissionEditData"></permission-tree>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+            <i class="fa fa-close"></i> @L("Cancel")
+        </button>
+        <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()" button-busy="vm.saving">
+            <i class="fa fa-save"></i> @L("Save")
+        </button>
+    </div>
+
+</form>

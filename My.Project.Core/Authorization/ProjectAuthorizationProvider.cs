@@ -14,9 +14,9 @@ namespace My.Project.Authorization
                 pages = context.CreatePermission(PermissionNames.Pages, L("全部"));
             }
 
-            context.CreatePermission(PermissionNames.Pages_Users, L("Users"));
-            context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
-            context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
+            //context.CreatePermission(PermissionNames.Pages_Sys_Users, L("Users"));
+            //context.CreatePermission(PermissionNames.Pages_Sys_Roles, L("Roles"));
+            //context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
 
             #region 系统管理
             {
@@ -25,11 +25,25 @@ namespace My.Project.Authorization
                 #region 地区管理
                 {
                     var pages_Sys_Places = pages_Sys.CreateChildPermission(PermissionNames.Pages_Sys_Places, L("地区管理"));
-                    var pages_Sys_Places_CreateOrEdit = pages_Sys.CreateChildPermission(PermissionNames.Pages_Sys_Places_CreateOrEdit, L("新增/修改"));
-                    var pages_Sys_Places_Delete = pages_Sys.CreateChildPermission(PermissionNames.Pages_Sys_Places_Delete, L("删除"));
+                    var pages_Sys_Places_CreateOrEdit = pages_Sys_Places.CreateChildPermission(PermissionNames.Pages_Sys_Places_CreateOrEdit, L("新增/修改"));
+                    var pages_Sys_Places_Delete = pages_Sys_Places.CreateChildPermission(PermissionNames.Pages_Sys_Places_Delete, L("删除"));
                 }
                 #endregion
-                
+                #region 租户管理
+                {
+                    var pages_Sys_Tenants = pages_Sys.CreateChildPermission(PermissionNames.Pages_Sys_Tenants, L("租户管理"));
+                }
+                #endregion
+                #region 用户管理
+                {
+                    var pages_Sys_Users = pages_Sys.CreateChildPermission(PermissionNames.Pages_Sys_Users, L("用户管理"));
+                }
+                #endregion
+                #region 角色管理
+                {
+                    var pages_Sys_Roles = pages_Sys.CreateChildPermission(PermissionNames.Pages_Sys_Roles, L("角色管理"));
+                }
+                #endregion
             }
             #endregion
         }

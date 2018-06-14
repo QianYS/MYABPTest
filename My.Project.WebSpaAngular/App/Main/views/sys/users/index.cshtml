@@ -1,0 +1,95 @@
+﻿<div ng-controller="app.views.sys.users.index as vm">
+    <div ng-include="'/App/Main/views/layout/content-header.cshtml'"></div>
+    <div class="content">
+        <div class="box">
+            <div class="box-header with-border">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">用户列表</h3>
+                <div class="pull-right box-tools">
+
+                </div>
+            </div>
+            <div class="box-body" busy-if="vm.loading||vm.initializing">
+                <div class="margin-5 row">
+                    <div class="col-sm-12">
+                        <form class="form-inline pull-left" role="form" ng-submit="vm.getGridData()">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" type="text" placeholder="用户名，姓名或邮箱"
+                                       ng-model="vm.requestParams.filter"
+                                       ng-show="!vm.advancedSearch">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-warning" uib-tooltip="搜索"
+                                            ng-show="!vm.advancedSearch">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end 简单搜索-->
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="margin-5 row">
+                    <div class="col-sm-12">
+                        <!--按钮-->
+                        <button ng-click="vm.createOrEditModal(null)" class="btn btn-sm" uib-tooltip="新增用户">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button ng-click="vm.refresh()" class="btn btn-sm btn-default" uib-tooltip="刷新数据">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <!--end 按钮-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" ui-i18n="zh-cn">
+                        <div class="body table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>@L("UserName")</th>
+                                        <th>@L("FullName")</th>
+                                        <th>@L("EmailAddress")</th>
+                                        <th>
+                                            <div style="text-align:center">@L("IsActive")</div>
+                                        </th>
+                                        <th>@L("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="user in vm.users">
+                                        <td>{{user.userName}}</td>
+                                        <td>{{user.fullName}}</td>
+                                        <td>{{user.emailAddress}}</td>
+                                        <td align="center">
+                                            <i ng-if="user.isActive" class="text-success glyphicon glyphicon-ok"></i>
+                                            <i ng-if="!user.isActive"  class="text-danger glyphicon glyphicon-remove"></i>
+                                        </td>
+                                        <td style="vertical-align:middle">
+                                            <div class="ui-grid-cell-contents">
+                                                <div class="btn-group">
+                                                    <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>
+                                                        <a href="javascript:void(0);" class="dropdown-toggle" uib-dropdown-toggle="">
+                                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                                        </a>
+                                                        <ul uib-dropdown-menu class="dropdown-menu-left">
+                                                            <li><a ng-click="vm.createOrEditModal(user)" href=""><i class="fa fa-edit"></i>修改</a></li>
+                                                            <li><a ng-click="vm.editPermission(user.id)" href=""><i class="fa fa-edit"></i>设置权限</a></li>
+                                                            <li><a ng-click="vm.delete(user)" href=""><i class="fa fa-trash-o"></i>删除</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <my-pagination page-option="vm.requestParams" class="pull-right"></my-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

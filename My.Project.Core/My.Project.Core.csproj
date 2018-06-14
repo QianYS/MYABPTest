@@ -204,6 +204,7 @@
     <Compile Include="Authorization\Users\UserManager.cs" />
     <Compile Include="Authorization\Users\UserStore.cs" />
     <Compile Include="Sys\Places\Place.cs" />
+    <Compile Include="Sys\Places\PlaceManager.cs" />
     <Compile Include="UnitManagement\Companies\Company.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
   </ItemGroup>

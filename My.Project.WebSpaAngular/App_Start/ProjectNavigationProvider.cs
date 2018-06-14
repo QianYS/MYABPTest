@@ -21,8 +21,8 @@ namespace My.Project.WebSpaAngular
                 icon: "fa fa-home"
                 ));
             context.Manager.MainMenu.AddItem(new MenuItemDefinition(
-                "Sys",
-                new LocalizableString("HomePage", ProjectConsts.LocalizationSourceName),
+                "Test",
+                new LocalizableString("测试", ProjectConsts.LocalizationSourceName),
                 url: null,
                 icon: "fa fa-home"
                 //requiresAuthentication: true
@@ -33,24 +33,8 @@ namespace My.Project.WebSpaAngular
                         new FixedLocalizableString("租户管理"),
                         url: "#tenants",
                         icon: "fa fa-globe",
-                        requiredPermissionName: PermissionNames.Pages_Tenants
+                        requiredPermissionName: PermissionNames.Pages_Sys_Tenants
                     )
-                ).AddItem(
-                    new MenuItemDefinition(
-                        "Users",
-                        new FixedLocalizableString("用户管理"),
-                        url: "#users",
-                        icon: "fa fa-users",
-                        requiredPermissionName: PermissionNames.Pages_Users
-                    )
-                ).AddItem(
-                    new MenuItemDefinition(
-                        "Roles",
-                        new FixedLocalizableString("角色管理"),
-                        url: "#roles",
-                        icon: "fa fa-tag",
-                        requiredPermissionName: PermissionNames.Pages_Roles
-                     )
                 ).AddItem(
                      new MenuItemDefinition(
                         "About",
@@ -58,6 +42,40 @@ namespace My.Project.WebSpaAngular
                         url: "#/about",
                         icon: "fa fa-info"
                     )
+                )
+            );
+            context.Manager.MainMenu.AddItem(new MenuItemDefinition(
+                "Sys",
+                //new LocalizableString("测试", ProjectConsts.LocalizationSourceName),
+                new FixedLocalizableString("系统管理"),
+                url: null,
+                icon: "fa fa-home"
+                //requiresAuthentication: true
+                )
+                .AddItem(
+                    new MenuItemDefinition(
+                        "Users",
+                        new FixedLocalizableString("用户管理"),
+                        url: "#users",
+                        icon: "fa fa-users",
+                        requiredPermissionName: PermissionNames.Pages_Sys_Users
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        "Roles",
+                        new FixedLocalizableString("角色管理"),
+                        url: "#roles",
+                        icon: "fa fa-tag",
+                        requiredPermissionName: PermissionNames.Pages_Sys_Roles
+                     )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        "Places",
+                        new FixedLocalizableString("地区管理"),
+                        url: "#places",
+                        icon: "fa fa-map-marker",
+                        requiredPermissionName: PermissionNames.Pages_Sys_Places
+                     )
                 )
             );
         }

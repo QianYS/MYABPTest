@@ -17,7 +17,7 @@ using Microsoft.AspNet.Identity;
 
 namespace My.Project.MultiTenancy
 {
-    [AbpAuthorize(PermissionNames.Pages_Tenants)]
+    [AbpAuthorize(PermissionNames.Pages_Sys_Tenants)]
     public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
