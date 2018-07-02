@@ -436,7 +436,7 @@
     <Content Include="App\Main\views\directives\buttonBusy.js" />
     <Content Include="App\Main\views\directives\enterKey.js" />
     <Content Include="App\Main\views\directives\jsTree.js" />
-    <Content Include="App\Main\views\directives\myPagination.js" />
+    <Content Include="App\Main\views\directives\myPage.js" />
     <Content Include="App\Main\views\directives\permissionTree.js" />
     <Content Include="App\Main\views\layout\content-header.js" />
     <Content Include="App\Main\views\layout\layout.js" />

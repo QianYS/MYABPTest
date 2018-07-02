@@ -13,7 +13,7 @@
                     <div class="col-sm-12">
                         <form class="form-inline pull-left" role="form" ng-submit="vm.getSearch()">
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" placeholder="用户名，姓名或邮箱"
+                                <input class="form-control" type="text" placeholder="地区名称、编码"
                                        ng-model="vm.requestParams.filter"
                                        ng-show="!vm.advancedSearch">
                                 <div class="input-group-btn">
@@ -85,7 +85,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <my-pagination page-option="vm.requestParams" class="pull-right"></my-pagination>
+                        <my-page page-option="vm.option" class="pull-right"></my-page>
                     </div>
                 </div>
             </div>

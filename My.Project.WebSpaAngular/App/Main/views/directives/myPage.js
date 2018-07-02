@@ -1,4 +1,4 @@
-﻿appModule.directive('myPagination', function () {
+﻿appModule.directive('myPage', function () {
     return {
         restrict: 'EA',
         replace: true,
@@ -24,18 +24,31 @@
         '</ul>',
 
         link: function ($scope) {
-            //console.log($scope);
+            console.log($scope.option);
             //容错处理
-            //if (!$scope.option.curr || isNaN($scope.option.curr) || $scope.option.curr < 1) $scope.option.curr = 1;
-            //if (!$scope.option.all || isNaN($scope.option.all) || $scope.option.all < 1) $scope.option.all = 1;
-            //if ($scope.option.curr > $scope.option.all) $scope.option.curr = $scope.option.all;
-            //if (!$scope.option.count || isNaN($scope.option.count) || $scope.option.count < 1) $scope.option.count = 10;
-            $scope.$watch('option.totalCount', function () {
-                getParameter();
+            if (!$scope.option.curr || isNaN($scope.option.curr) || $scope.option.curr < 1) $scope.option.curr = 1;
+            if (!$scope.option.all || isNaN($scope.option.all) || $scope.option.all < 1) $scope.option.all = 1;
+            if ($scope.option.curr > $scope.option.all) $scope.option.curr = $scope.option.all;
+            //if (!$scope.option.count || isNaN($scope.option.count) || $scope.option.count < 1) $scope.option.count = 10;            
+            if (isNaN($scope.option.count)) {
+                $scope.option.count = $scope.option.all % $scope.option.size > 0 ? parseInt(($scope.option.all / $scope.option.size) + 1) : parseInt($scope.option.all / $scope.option.size);
+                if($scope.option.count >= 8){
+                    $scope.option.count = 8;
+                }
+            }
+            
+            $scope.$watch('option.all', function() {
+                $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
                 isDisabled();
             })
+
+            //$scope.$watch('option.curr', function () {
+            //    $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
+            //    isDisabled();
+            //})
+
             //得到显示页数的数组
-            getParameter();
+            $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
             isDisabled()
 
             //绑定点击事件
@@ -52,13 +65,13 @@
                 if ($scope.option.click && typeof $scope.option.click === 'function') {
                     $scope.option.click(page);
                     $scope.option.curr = page;
-                    $scope.page = getRange($scope.option.curr, $scope.option.all, 10);
+                    $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
                 }
                 isDisabled();
             };
 
             //返回页数范围（用来遍历）
-            function getRange(curr, all, count) {                
+            function getRange(curr, all, count) {
                 //计算显示的页数
                 curr = parseInt(curr);
                 all = parseInt(all);
@@ -69,12 +82,12 @@
                 if (from <= 0) {
                     from = 1;
                     to = from + count - 1;
-                    if (to > all) {
-                        to = all;
+                    if (to > count) {
+                        to = count;
                     }
                 }
-                if (to > all) {
-                    to = all;
+                if (to > count) {
+                    to = count;
                     from = to - count + 1;
                     if (from <= 0) {
                         from = 1;
@@ -87,31 +100,10 @@
                 return range;
             }
 
-
-            function getParameter()
-            {
-                var curr = parseInt($scope.option.skipCount / $scope.option.maxResultCount);
-                $scope.option.curr = curr != 0 ? curr : 1;
-                if ($scope.option.totalCount / $scope.option.maxResultCount > 1) {
-                    if ($scope.option.totalCount % $scope.option.maxResultCount > 0) {
-                        $scope.option.all = parseInt($scope.option.totalCount / $scope.option.maxResultCount) + 1;
-                    }
-                    else {
-                        $scope.option.all = parseInt($scope.option.totalCount / $scope.option.maxResultCount)
-                    }
-                }
-                else {
-                    $scope.option.all = 1;
-                }
-                $scope.page = getRange($scope.option.curr, $scope.option.all, 10);
-                $scope.disabledFirst = $scope.option.curr == 1 ? true : false;
-                $scope.disabledLast = $scope.option.curr == $scope.option.all ? true : false;
-            }
-
             function isDisabled()
             {
                 $scope.disabledFirst = $scope.option.curr == 1 ? true : false;
-                $scope.disabledLast = $scope.option.curr == $scope.option.all ? true : false;
+                $scope.disabledLast = $scope.option.curr == $scope.option.count ? true : false;
             }
         }
     }

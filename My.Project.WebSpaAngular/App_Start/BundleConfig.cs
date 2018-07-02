@@ -69,6 +69,7 @@ namespace My.Project.WebSpaAngular
                     .Include("~/css/ui/AdminLTE.min.css", new CssRewriteUrlTransform())
                     //.Include("~/css/themes/all-themes.css", new CssRewriteUrlTransform())
                     .Include("~/css/ui/skins/_all-skins.css", new CssRewriteUrlTransform())
+                    .Include("~/js/ui-grid/ui-grid.min.css", new CssRewriteUrlTransform())
                     .Include("~/js/jstree/themes/default/style.min.css", new CssRewriteUrlTransform())
                     //.Include("~/Scripts/Jcrop/css/jquery.Jcrop.min.css", new CssRewriteUrlTransform())
                 );
@@ -120,7 +121,8 @@ namespace My.Project.WebSpaAngular
 
                         "~/js/underscore/underscore.js",
                         "~/js/slimScroll/jquery.slimscroll.min.js",
-                        "~/js/jstree/jstree.js"
+                        "~/js/jstree/jstree.js",
+                        "~/js/ui-grid/ui-grid.min.js"
                     )
                 );
 

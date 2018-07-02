@@ -6,9 +6,26 @@
             var vm = this;
             vm.loading = true;
             vm.places = [];
+
             //页面数据显示条数
             var defaultPageSize = 20;
-            //查询参数 & 分页组件参数
+
+            // 分页组件参数
+            vm.option = {
+                curr: 1, //当前页数
+                //all: 20, //总页数
+                size: defaultPageSize, //每页显示最大条数
+                //count: 3, //最多显示的页数，默认为10
+                //点击页数的回调函数，参数page为点击的页数
+                click: function(page) {
+                    vm.requestParams.skipCount = (page - 1) * defaultPageSize;
+                    vm.option.curr = page;
+                    vm.getGridData()
+                    //这里可以写跳转到某个页面等...
+                }
+            }
+
+            //查询参数
             vm.requestParams = {
                 filter: '',
                 skipCount: 0,
@@ -16,11 +33,6 @@
                 sorting: null,
                 deep: 1,
                 isParentOrSon: true,
-                //页码点击跳转
-                click: function (page) {
-                    vm.requestParams.skipCount = (page - 1) * defaultPageSize;
-                    vm.getGridData()
-                }
             };
 
             vm.getParentList = function (entity) {
@@ -42,7 +54,8 @@
             vm.getGridData = function () {
                 vm.loading = true;
                 var s = placeService.getIndexList(vm.requestParams).then(function (result) {
-                    vm.requestParams.totalCount = result.data.totalCount
+                    vm.option.all = result.data.totalCount;
+                    vm.option.count = result.data.totalCount % defaultPageSize > 0 ? parseInt((result.data.totalCount / defaultPageSize) + 1): parseInt(result.data.totalCount / defaultPageSize) ;
                     vm.places = result.data.items;
                 }).finally(function () {
                     vm.loading = false;
@@ -85,15 +98,16 @@
 
             //刷新
             vm.refresh = function () {
-                vm.requestParams.code = "";
-                vm.requestParams.deep = 1;
-                vm.requestParams.isParentOrSon = true;
+                //vm.requestParams.code = "";
+                //vm.requestParams.deep = 1;
+                //vm.requestParams.isParentOrSon = true;
                 vm.getGridData();
             };
 
             vm.getSearch = function () {
                 vm.requestParams.code = "";
                 vm.requestParams.deep = null;
+                vm.requestParams.skipCount = 0;
                 vm.getGridData();
             }
 
