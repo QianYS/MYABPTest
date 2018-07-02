@@ -36,7 +36,7 @@
                 vm.loading = true;
                 var s = userService.getAll(vm.requestParams).then(function (result) {
                     vm.option.all = result.data.totalCount;
-                    vm.option.count = result.data.totalCount % defaultPageSize > 0 ? parseInt((result.data.totalCount / defaultPageSize) + 1) : parseInt(result.data.totalCount / defaultPageSize);
+                    vm.option.count = result.data.totalCount % defaultPageSize > 0 ? (parseInt((result.data.totalCount / defaultPageSize) + 1) > 8 ? 8 : parseInt((result.data.totalCount / defaultPageSize) + 1) > 8) : (parseInt(result.data.totalCount / defaultPageSize) > 8 ? 8 : parseInt(result.data.totalCount / defaultPageSize));
                     vm.users = result.data.items;
                 }).finally(function () {
                     vm.loading = false;

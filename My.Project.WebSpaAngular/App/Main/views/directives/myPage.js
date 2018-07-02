@@ -86,8 +86,8 @@
                         to = count;
                     }
                 }
-                if (to > count) {
-                    to = count;
+                if (to >= all) {
+                    to = all;
                     from = to - count + 1;
                     if (from <= 0) {
                         from = 1;

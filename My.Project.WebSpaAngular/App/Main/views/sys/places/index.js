@@ -54,8 +54,21 @@
             vm.getGridData = function () {
                 vm.loading = true;
                 var s = placeService.getIndexList(vm.requestParams).then(function (result) {
-                    vm.option.all = result.data.totalCount;
-                    vm.option.count = result.data.totalCount % defaultPageSize > 0 ? parseInt((result.data.totalCount / defaultPageSize) + 1): parseInt(result.data.totalCount / defaultPageSize) ;
+                    vm.option.all = result.data.totalCount % defaultPageSize > 0 ? parseInt((result.data.totalCount / defaultPageSize) + 1) : parseInt(result.data.totalCount / defaultPageSize);
+                    //if (result.data.totalCount % defaultPageSize > 0){
+                    //    if (parseInt((result.data.totalCount / defaultPageSize) + 1) >= 8) {
+                    //        vm.option.count = 8;
+                    //    } else {
+                    //        vm.option.count = parseInt((result.data.totalCount / defaultPageSize) + 1);
+                    //    }
+                    //} else {
+                    //    if (parseInt(result.data.totalCount / defaultPageSize) >= 8) {
+                    //        vm.option.count = 8;
+                    //    } else {
+                    //        vm.option.count = parseInt(result.data.totalCount / defaultPageSize);
+                    //    }
+                    //}
+                    vm.option.count = vm.option.all >= 8 ? 8 : vm.option.all;
                     vm.places = result.data.items;
                 }).finally(function () {
                     vm.loading = false;
@@ -98,9 +111,7 @@
 
             //刷新
             vm.refresh = function () {
-                //vm.requestParams.code = "";
-                //vm.requestParams.deep = 1;
-                //vm.requestParams.isParentOrSon = true;
+                //vm.option.curr = 1;
                 vm.getGridData();
             };
 
