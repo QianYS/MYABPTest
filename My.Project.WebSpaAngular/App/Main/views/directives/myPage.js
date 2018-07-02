@@ -76,6 +76,9 @@
                 curr = parseInt(curr);
                 all = parseInt(all);
                 count = parseInt(count);
+                if (curr > all) {
+                    $scope.option.curr = 1;
+                }
                 var from = curr - parseInt(count / 2);
                 var to = curr + parseInt(count / 2) + (count % 2) - 1;
                 //显示的页数容处理
@@ -103,7 +106,7 @@
             function isDisabled()
             {
                 $scope.disabledFirst = ($scope.option.curr === 1 ? true : false);
-                $scope.disabledLast = ($scope.option.curr === $scope.option.count ? true : false);
+                $scope.disabledLast = ($scope.option.curr === $scope.option.all ? true : false);
             }
         }
     }
