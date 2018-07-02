@@ -51,7 +51,7 @@
                     backdrop: 'static',
                     resolve: {
                         Entity: {
-                            Id: entity == null ? null : entity.id
+                            Id: entity === null ? null : entity.id
                         },
                     }
                 });

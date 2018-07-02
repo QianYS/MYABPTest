@@ -53,15 +53,15 @@
 
             //绑定点击事件
             $scope.pageClick = function (page) {
-                if (page == '‹') {
+                if (page === '‹') {
                     page = parseInt($scope.option.curr) - 1;
-                } else if (page == '›') {
+                } else if (page === '›') {
                     page = parseInt($scope.option.curr) + 1;
                 }
                 if (page < 1) page = 1;
                 else if (page > $scope.option.all) page = $scope.option.all;
                 //点击相同的页数 不执行点击事件
-                if (page == $scope.option.curr) return;
+                if (page === $scope.option.curr) return;
                 if ($scope.option.click && typeof $scope.option.click === 'function') {
                     $scope.option.click(page);
                     $scope.option.curr = page;
@@ -102,8 +102,8 @@
 
             function isDisabled()
             {
-                $scope.disabledFirst = $scope.option.curr == 1 ? true : false;
-                $scope.disabledLast = $scope.option.curr == $scope.option.count ? true : false;
+                $scope.disabledFirst = ($scope.option.curr === 1 ? true : false);
+                $scope.disabledLast = ($scope.option.curr === $scope.option.count ? true : false);
             }
         }
     }

@@ -70,7 +70,7 @@
                     backdrop: 'static',
                     resolve: {
                         Entity: {
-                            Code: place == null ? null : place.code,
+                            Code: place === null ? null : place.code,
                             IsChangedOrCreate: isChangedOrCreate
                         },
                     }

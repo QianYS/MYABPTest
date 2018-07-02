@@ -50,7 +50,7 @@
                     backdrop: 'static',
                     resolve: {
                         Entity: {
-                            Id: role == null ? null : role.id
+                            Id: role === null ? null : role.id
                         },
                     }
                 });
