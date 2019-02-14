@@ -1,5 +1,5 @@
 # MYABPTest
-ABP框架尝试使用 功能后续完善 ui（AdminLTE）
+ABP框架尝试使用 功能后续完善 ui（AdminLTE） 非.net core版本
 多数据库
 #
   创建或更新数据库 Update-Database -ConfigurationTypeName Configuration文件名
